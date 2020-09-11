@@ -1,4 +1,4 @@
-# Ligand Maps: Generating a Pharmacophoric Models from Superimposed PDB Data.
+# Ligand Maps: Generating Pharmacophoric Models from Superimposed PDB Data.
 
 
 This workflow was developed during my PhD and used as a reference to compare hotspot pharmacophore models (generated with the Hotspots API) against.
