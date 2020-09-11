@@ -1,0 +1,18 @@
+@<TRIPOS>MOLECULE
+A:CL299
+     2     1     1     0     1
+SMALL
+NO_CHARGES
+****
+Generated from the CSD
+
+@<TRIPOS>ATOM
+     1 CL      35.8316  20.1783  29.6822   Cl        1 CL299   0.0000
+     2 H1      37.1056  20.1783  29.6822   H         1 CL299   0.0000
+@<TRIPOS>BOND
+     1     1     2    1
+@<TRIPOS>SUBSTRUCTURE
+     1 CL299       1 GROUP             0 A     CL      0  
+@<TRIPOS>SET
+CCDC_LIGAND STATIC ATOMS
+2 1 2 
