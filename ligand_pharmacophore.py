@@ -48,7 +48,7 @@ class Runner(argparse.ArgumentParser):
         # 20 %
         cutoff = len(ligands) * 0.2
         feats, feat_point_grds = create_consensus(lig_pharms, cutoff=cutoff)
-
+        print(feats)
         for feat in feats:
             if feat.identifier == "ring":
                 p = feat.spheres[0].centre
@@ -79,20 +79,20 @@ class Runner(argparse.ArgumentParser):
         with HotspotWriter(hr_out) as w:
             w.write(hr)
 
-        # p_out = os.path.join(out_dir, "ligand_pharmacophores")
-        # if not os.path.exists(p_out):
-        #     os.mkdir(p_out)
-        #
-        # for n in [6, 5, 4, 3]:
-        #     lp = LigandPharmacophoreModel()
-        #     lp.detected_features = feats
-        #     lp.detected_features = lp.top_features(num=n)
-        #     for feat in lp.detected_features:
-        #         lp.add_feature(feat)
-        #
-        #     lp.intra_only = True
-        #
-        #     lp.write(os.path.join(p_out, f"{n}.cm"))
+        p_out = os.path.join(out_dir, "ligand_pharmacophores")
+        if not os.path.exists(p_out):
+            os.mkdir(p_out)
+
+        for n in [6, 5, 4, 3]:
+            lp = LigandPharmacophoreModel()
+            lp.detected_features = feats
+            lp.detected_features = lp.top_features(num=n)
+            for feat in lp.detected_features:
+                lp.add_feature(feat)
+
+            lp.intra_only = True
+
+            lp.write(os.path.join(p_out, f"{n}.cm"))
 
     def run(self):
         ligands = io.CrystalReader(self.args.ligand_overlay)

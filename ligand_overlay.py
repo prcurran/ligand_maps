@@ -11,7 +11,7 @@ import pandas as pd
 from ccdc import io
 from ccdc.molecule import Molecule
 from ccdc.protein import Protein
-from hotspots.pharmacophore_extension import LigandPharmacophoreModel, create_consensus
+from hotspots.wrapper_protoss import Protoss
 from hotspots.data import common_solvents
 from rdkit import Chem
 from rdkit import DataStructs
@@ -77,12 +77,33 @@ def ftp_download(args):
     return out_path
 
 
-def download(pdbs, out_dir=None, processes=6):
+def protoss_download(args):
+    """"""
+    try:
+        pdb, out_dir = args
+        protoss = Protoss()
+        result = protoss.add_hydrogens(pdb_code=pdb)
+
+        out_path = os.path.join(out_dir, f"{pdb}.pdb")
+
+        with io.MoleculeWriter(out_path) as w:
+            w.write(result.protein)
+
+        return out_path
+
+    except:
+        print(f"ERROR {pdb}")
+
+
+def download(pdbs, out_dir=None, processes=6, protoss=True):
     """"""
     args = zip(pdbs, [out_dir] * len(pdbs))
 
     with Pool(processes=processes) as pool:
-        list(tqdm(pool.imap(ftp_download, args), total=len(pdbs)))
+        if protoss:
+            list(tqdm(pool.imap(protoss_download, args), total=len(pdbs)))
+        else:
+            list(tqdm(pool.imap(ftp_download, args), total=len(pdbs)))
 
 
 def prepare_protein(pdb, entity, out_dir):
@@ -271,6 +292,10 @@ class Runner(argparse.ArgumentParser):
         self.args = self.parse_args()
 
     def run(self):
+
+        if not os.path.exists(self.args.output_directory):
+            os.mkdir(self.args.output_directory)
+
         rms_cutoff = 1
 
         tmp = tempfile.mkdtemp()
@@ -344,7 +369,7 @@ class Runner(argparse.ArgumentParser):
 
         with io.MoleculeWriter(os.path.join(self.args.output_directory, "ligand_overlay.mol2")) as w:
             for lig in all_ligands:
-                lig.add_hydrogens()
+                # lig.add_hydrogens()
                 w.write(lig)
 
 if __name__ == '__main__':

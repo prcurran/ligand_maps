@@ -1,0 +1,41 @@
+FEATURE_LIBRARY_START
+
+    FEATURE_SUBSTRUCTURE_START
+
+        FEATURE_NAME ring
+
+        DEFINE_FEATURE centroid CENTROID
+
+        SMARTS_DEF [!#1]1~[!#1]~[!#1]~[!#1]~1
+        FEATURE centroid 0 1 2 3
+
+        SMARTS_DEF [!#1]1~[!#1]~[!#1]~[!#1]~[!#1]~1
+        FEATURE centroid 0 1 2 3 4
+
+        SMARTS_DEF [!#1]1~[!#1]~[!#1]~[!#1]~[!#1]~[!#1]~1
+        FEATURE centroid 0 1 2 3 4 5
+
+        SMARTS_DEF [!#1]1~[!#1]~[!#1]~[!#1]~[!#1]~[!#1]~[!#1]~1
+        FEATURE centroid 0 1 2 3 4 5 6
+
+        SMARTS_DEF [!#1]1~[!#1]~[!#1]~[!#1]~[!#1]~[!#1]~[!#1]~[!#1]~1
+        FEATURE centroid 0 1 2 3 4 5 6 7
+
+    FEATURE_SUBSTRUCTURE_END
+
+FEATURE_LIBRARY_END
+
+PHARMACOPHORE_FEATURE ring
+PHARMACOPHORE_SPHERE 18 13 112.5 2
+PHARMACOPHORE_FEATURE_DESCRIPTION ring
+
+PHARMACOPHORE_FEATURE ring
+PHARMACOPHORE_SPHERE 18.5 15 109 2
+PHARMACOPHORE_FEATURE_DESCRIPTION ring
+
+PHARMACOPHORE_FEATURE ring
+PHARMACOPHORE_SPHERE 21 15 107 2
+PHARMACOPHORE_FEATURE_DESCRIPTION ring
+
+
+
